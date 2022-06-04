@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--    配置MyBatis运行环境-->
+    <environments default="dev">
+        <environment id="dev">
+            <!--            配置JDBC事务管理-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--            POOLED配置JDBC数据源连接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"></property>
+
+                <!--                远程数据库-->
+                <property name="url" value="jdbc:mysql://121.41.49.31:3306/ept2?
+                    useUnicode=true&amp;characterEncoding=UTF-8"></property>
+
+                <property name="username" value="root"></property>
+                <property name="password" value="@zHci?075@am)5G7%9eb81u32$"></property>
+            </dataSource>
+
+        </environment>
+    </environments>
+
+    <!--    注册Mapper-->
+    <mappers>
+        <mapper resource="com/ept/powersupport/repository/UserRepository.xml"></mapper>
+        <mapper resource="com/ept/powersupport/repository/BusinessRepository.xml"></mapper>
+    </mappers>
+
+</configuration>

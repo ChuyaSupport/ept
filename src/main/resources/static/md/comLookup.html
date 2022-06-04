@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<span style=" font-size: 20px">商家接口</span>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<div id="content"></div>
+
+<!--小程序接口-->
+<script>
+  $.get('http://pics.zhcy.site/comLookup.md', function(response, status, xhr){
+    $("#content").html(marked(response));
+  });
+</script>
+
+
+</body>
+</html>

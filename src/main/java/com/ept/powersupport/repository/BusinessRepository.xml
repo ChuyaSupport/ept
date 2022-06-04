@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ept.powersupport.repository.BusinessRepository">
+    <select id="checkIsPhoneNumberExisted" parameterType="String" resultType="String">
+        select * from t_business where phone_number = ${phone_number}
+    </select>
+    <insert id="addBusiness" parameterType="com.ept.powersupport.entity.Business">
+        insert into t_business(phone_number, business_passwd) values(#{phone_number}, #{business_passwd})
+    </insert>
+    <select id="findBusinessByPhoneNumber" parameterType="String" resultType="com.ept.powersupport.entity.Business">
+        select * from t_business where phone_number = #{phone_number}
+    </select>
+
+    <update id="update" parameterType="com.ept.powersupport.entity.Business">
+        update t_business set shop_name = #{shop_name},
+                              score = ${score},
+                              start_delivery_price = ${start_delivery_price},
+                              delivery_price = ${delivery_price},
+                              discount_info = #{discount_info},
+                              business_notice = #{business_notice},
+                              business_longitude = ${business_longitude},
+                              business_latitude = ${business_latitude},
+                              business_logo = #{business_logo},
+                              business_backdrop = #{business_backdrop},
+                              status = ${status} where business_id = ${business_id}
+    </update>
+
+    <insert id="addCommodity" parameterType="com.ept.powersupport.entity.Commodity">
+        insert into t_commodity(business_id, com_name, com_monthly_sales, com_des, comments_pct, com_price, discount_price, com_img, com_type, grp_pchs_num, add_time)
+        values(${business_id}, #{com_name}, ${com_monthly_sales}, #{com_des}, #{comments_pct}, #{com_price}, #{discount_price}, #{com_img}, #{com_type}, ${grp_pchs_num}, #{add_time})
+    </insert>
+
+    <insert id="addComImgs" parameterType="com.ept.powersupport.entity.ComImg">
+        insert into t_com_img(com_id, img_url, add_time) values(${com_id}, #{img_url}, #{add_time})
+    </insert>
+
+    <select id="findNewAddedCommodity" parameterType="String" resultType="com.ept.powersupport.entity.Commodity">
+        select * from t_commodity where business_id = #{business_id} and add_time = #{add_time}
+    </select>
+
+    <select id="findNewAddedImgList" parameterType="String" resultType="com.ept.powersupport.entity.ComImg">
+        select * from t_com_img where com_id = #{com_id} and add_time = #{add_time}
+    </select>
+
+
+    <insert id="setGrp" parameterType="com.ept.powersupport.entity.Group">
+        insert into t_group_list(group_id, com_id, start_time, end_time, status, free_num)
+        values(#{group_id}, #{com_id}, #{start_time}, #{end_time}, #{status}, #{free_num})
+    </insert>
+
+    <delete id="delFromGrpDtl" parameterType="String">
+        delete from t_group_dtl where join_id = #{join_id}
+    </delete>
+
+    <delete id="delFromGrpList" parameterType="String">
+        delete from t_group_list where group_id = #{group_id}
+    </delete>
+
+    <delete id="delFromComImg" parameterType="String">
+        delete from t_com_img where img_id = #{img_id}
+    </delete>
+
+    <delete id="delFromCommodity" parameterType="String">
+        delete from t_commodity where com_id = #{com_id}
+    </delete>
+
+    <delete id="grpDelete" parameterType="String">
+        delete from t_group_list where group_id = #{group_id}
+    </delete>
+
+</mapper>

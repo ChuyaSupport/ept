@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ept.powersupport.repository.UserRepository">
+    <insert id="save" parameterType="com.ept.powersupport.entity.User">
+        insert into t_user(openid, user_name, user_profile, user_longitude, user_latitude)
+        values(#{openid}, #{user_name}, #{user_profile}, #{user_longitude}, #{user_latitude})
+    </insert>
+
+    <update id="update" parameterType="com.ept.powersupport.entity.User">
+        update t_user set user_name = #{user_name}, user_profile = #{user_profile},
+                          user_longitude = #{user_longitude}, user_latitude = #{user_latitude}
+        where openid = #{openid}
+    </update>
+
+
+    <select id="findByOpenid" parameterType="String" resultType="com.ept.powersupport.entity.User">
+        select * from t_user where openid = #{openid}
+    </select>
+
+    <insert id="addFollow" parameterType="com.ept.powersupport.entity.Follow">
+        insert into t_follow(follow_id, openid, business_id) values(#{follow_id}, #{openid}, #{business_id})
+    </insert>
+
+    <delete id="rmFollow" parameterType="com.ept.powersupport.entity.Follow">
+        delete from t_follow where follow_id = #{follow_id}
+    </delete>
+
+    <select id="loadAllBusinessInfo" resultType="com.ept.powersupport.entity.Business">
+        select * from t_business
+    </select>
+
+    <select id="loadAllCommodityInfo" resultType="com.ept.powersupport.entity.Commodity">
+        select * from t_commodity
+    </select>
+
+    <select id="loadAllFollowInfo" resultType="com.ept.powersupport.entity.Follow">
+        select * from t_follow
+    </select>
+
+    <select id="loadAllUserInfo" resultType="com.ept.powersupport.entity.User">
+        select * from t_user
+    </select>
+
+    <select id="findSingleUserByOpenid" parameterType="String" resultType="com.ept.powersupport.entity.User">
+        select * from t_user where openid = #{openid}
+    </select>
+
+    <select id="loadAllComImg" resultType="com.ept.powersupport.entity.ComImg">
+        select * from t_com_img
+    </select>
+
+    <select id="loadAllGroupList" resultType="com.ept.powersupport.entity.Group">
+        select * from t_group_list
+    </select>
+
+    <select id="loadAllGroupDtl" resultType="com.ept.powersupport.entity.GroupDtl">
+        select * from t_group_dtl
+    </select>
+
+    <select id="loadAllCommentList" resultType="com.ept.powersupport.entity.Comment">
+        select * from t_comment_list
+    </select>
+
+    <insert id="addGrpDtl" parameterType="com.ept.powersupport.entity.GroupDtl">
+        insert into t_group_dtl(join_id, group_id, openid, status, is_free)
+        values(#{join_id}, #{group_id}, #{openid}, #{status}, #{is_free})
+    </insert>
+
+    <update id="updateTGroupListStatus1" parameterType="String">
+        update t_group_list set status = 1 where group_id = #{group_id}
+    </update>
+
+    <update id="updateTGroupDtlStatus1" parameterType="String">
+        update t_group_dtl set status = 1 where join_id = #{join_id}
+    </update>
+
+    <delete id="QuitGrp" parameterType="String">
+        delete from t_group_dtl where group_id = #{group_id} and openid = #{openid}
+    </delete>
+
+    <update id="updateTGroupListStatus2" parameterType="com.ept.powersupport.entity.Group">
+        update t_group_list set status = 2 where group_id = #{group_id}
+    </update>
+
+    <update id="updateTGroupDtlStatus2" parameterType="com.ept.powersupport.entity.GroupDtl">
+        update t_group_dtl set status = 2 where join_id = #{join_id}
+    </update>
+
+    <insert id="newAddr" parameterType="com.ept.powersupport.entity.UserAddr">
+        insert into t_user_addr(addr_id, openid, addr, name, gender, phone, user_longitude, user_latitude, recently_used)
+        values(#{addr_id}, #{openid}, #{addr}, #{name}, #{gender}, #{phone}, #{user_longitude}, #{user_latitude}, #{recently_used})
+    </insert>
+
+    <insert id="delAddr" parameterType="com.ept.powersupport.entity.UserAddr">
+        delete from t_user_addr where addr_id = #{addr_id}
+    </insert>
+
+    <select id="loadAllUserAddrInfo" resultType="com.ept.powersupport.entity.UserAddr">
+        select * from t_user_addr;
+    </select>
+
+    <select id="loadAllCouponInfo" resultType="com.ept.powersupport.entity.Coupon">
+        select * from t_coupon;
+    </select>
+
+    <insert id="newOrder" parameterType="com.ept.powersupport.entity.Order">
+        insert into t_order(order_id, join_id, coupon_id, addr_id, note, tableware, price)
+        values(#{order_id}, #{join_id}, #{coupon_id}, #{addr_id}, #{note}, #{tableware}, #{price})
+    </insert>
+
+    <update id="updateTGrpDtlFree1" parameterType="String">
+        update t_group_dtl set is_free = 1 where join_id = #{join_id}
+    </update>
+
+    <delete id="deleteOrder" parameterType="com.ept.powersupport.entity.Order">
+        delete from t_order where order_id = #{order_id}
+    </delete>
+
+    <update id="updateUserAddrStatus" parameterType="String">
+        update t_user_addr set recently_used = 0 where addr_id = #{addr_id}
+    </update>
+
+    <select id="loadAllOrderInfo" resultType="com.ept.powersupport.entity.Order">
+        select * from t_order;
+    </select>
+
+    <update id="updatePaidStatus" parameterType="String">
+        update t_order set paid = 1 where order_id = #{order_id}
+    </update>
+
+    <delete id="UnpaidDtlClean" parameterType="String">
+        delete from t_group_dtl where join_id = #{join_id}
+    </delete>
+    <delete id="UnpaidOrderClean" parameterType="String">
+        delete from t_order where order_id = #{order_id}
+    </delete>
+
+    <update id="topUp" parameterType="com.ept.powersupport.entity.User">
+        update t_user set balance = #{balance} where openid = #{openid}
+    </update>
+    <update id="cost" parameterType="com.ept.powersupport.entity.User">
+        update t_user set balance = #{balance} where openid = #{openid}
+    </update>
+
+    <update id="couponUpdate" parameterType="com.ept.powersupport.entity.Coupon">
+        update t_coupon set status = #{status} where coupon_id = #{coupon_id}
+    </update>
+
+    <insert id="couponHangOut" parameterType="com.ept.powersupport.entity.Coupon">
+        insert into t_coupon(coupon_id, coupon_id, coupon_id, value) values(#{coupon_id}, #{coupon_id}, #{coupon_id}, #{value})
+    </insert>
+
+    <update id="setCouponStat0" parameterType="com.ept.powersupport.entity.Coupon">
+        update t_coupon set status = 0 where coupon_id = #{coupon_id}
+    </update>
+
+    <update id="updateUserBalance" parameterType="com.ept.powersupport.entity.User">
+        update t_user set balance = #{balance} where openid = #{openid}
+    </update>
+
+</mapper>

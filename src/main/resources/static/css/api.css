@@ -1,0 +1,44 @@
+a {
+	color: indigo;
+	text-decoration: none;
+}
+
+body {
+	height: 100%;
+}
+
+.mainBlock {
+	height: 650px;
+	display: flex;
+	flex-direction: row;
+}
+
+.index {
+	width: 150px;
+	margin-bottom: 20px;
+	padding-left: 20px;
+	font-family: 'Merriweather', serif;
+	border-right: 1px darkgray solid;
+}
+
+.index a {
+	display: block;
+}
+
+.index span {
+	display: block;
+	margin: 10px 0px;
+	font-size: 20px;
+}
+
+.iframe {
+	flex: 1;
+}
+
+.iframe iframe {
+	height: 100%;
+}
+
+.iframe iframe::-webkit-scrollbar {
+	width: 0;
+}

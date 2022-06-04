@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html, body{
+            width: 100%;
+            height: 100%;
+        }
+        .a{
+            width: 100%;
+            height: 100%;
+        }
+        page2{
+            position: absolute;
+            bottom: 0px;
+        }
+        .a div span a {
+            color: indigo;
+            text-decoration: none;
+        }
+        .a div span a:hover {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="a">
+    <!--头部信息-->
+    <div>
+    <span style="text-align:center; line-height: 18px; font-size: 20px">
+        <div style="width: 100%; height: 10px"></div>
+        <a href="./api.html">&nbsp;&nbsp;&nbsp;&nbsp;接口文档&nbsp;&nbsp;</a>
+        <span style="color: indigo">|</span>
+        <a href="./test.html" target="_parent">&nbsp;&nbsp;测试页&nbsp;&nbsp;</a>
+    </span>
+        <!--    <hr>-->
+    </div>
+
+<!--    欢迎图片-->
+    <div align="center">
+        <div style="width: 100%; height: 30px"></div>
+        <img src="http://pics.zhcy.site/Welcome.jpg">
+    </div>
+
+    <!--底部信息-->
+    <br><br><br><br><br>
+    <div id="page2">
+        <iframe align="center" width="100%" height="170" src="./bottom.html"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+    </div>
+</div>
+
+
+
+</body>
+</html>
